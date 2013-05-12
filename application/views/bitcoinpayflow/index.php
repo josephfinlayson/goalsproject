@@ -5,7 +5,7 @@
 
  ?>
 
-<?php echo form_open('bitcoinpayflow/index'); ?>
+<?php echo form_open('bitzon/index'); ?>
 
 	<label for="first_name"> First name </label>
 	<input type = "input" name="first_name" /> <br />

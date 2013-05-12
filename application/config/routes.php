@@ -46,6 +46,7 @@
 
 // $route['news'] = 'news';
 $route['default_controller'] = '/bitzon/index';
+$route['bitzon/index'] = '/bitzon/index';
 
 
 /* End of file routes.php */
