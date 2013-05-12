@@ -11,7 +11,7 @@ $orders = $payflow->orders(array(
 
 
 
-class bitcoinpayflow extends CI_controller
+class Bitzon extends CI_controller
 {
 public function index($data = NULL)
 
@@ -21,7 +21,7 @@ public function index($data = NULL)
 		$authtoken = '4f7f0836cc321bfd78303508bd154a00';
 
 		//load the libraries
-		$this->load->helper('form');
+		$this->load->helper(array('form','url'));
 		$this->load->library('form_validation');
 		// load the view
 
@@ -62,7 +62,7 @@ $data = array('a' => 'b');
 		{
 $data = array('a' => 'b');
 		$this->load->view('templates/header', $data);
-		$this->load->view('bitcoinpayflow/indeX', $data);
+		$this->load->view('bitcoinpayflow/index', $data);
 		$this->load->view('templates/footer', $data);
 		}
 
@@ -93,11 +93,24 @@ $data = array('a' => 'b');
 // send it off to the model
 		}
 	}
+
+    public function about(){
+    $this->load->helper(array('form','url'));
+        $this->load->view('templates/header', $data);
+        $this->load->view('static/about', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
+    public function contact(){
+            $this->load->helper(array('form','url'));
+        $this->load->view('templates/header', $data);
+        $this->load->view('static/about', $data);
+        $this->load->view('templates/footer', $data);
+}
 }
 
 
-
-	class bitcoinpayflow_API extends bitcoinpayflow
+	class bitcoinpayflow_API extends Bitzon
 	{
 
  //API Configuration - setting constants for the curl url

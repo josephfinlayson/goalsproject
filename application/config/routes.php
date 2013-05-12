@@ -45,7 +45,7 @@
 // $route['news/(:any)'] = 'news/view/$1';
 
 // $route['news'] = 'news';
-$route['default_controller'] = '/bitcoinpayflow/index';
+$route['default_controller'] = '/bitzon/index';
 
 
 /* End of file routes.php */
