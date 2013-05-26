@@ -15,88 +15,113 @@ class Bitzon extends CI_controller
 {
 public function index($data = NULL)
 
-	{
-		//declare constants
-		
-		$authtoken = '4f7f0836cc321bfd78303508bd154a00';
+    {
+        //declare constants
+        
+        $authtoken = '343352b4ac38e78c31e3039a719403a6';// <- Test token //'4f7f0836cc321bfd78303508bd154a00'; <- live token
 
-		//load the libraries
-		$this->load->helper(array('form','url'));
-		$this->load->library('form_validation');
-		// load the view
+        //load the libraries
+        $this->load->library('form_validation');
+        $this->load->database();
+        $this->load->helper('form');
+        $this->load->helper('url');
+        $this->load->model('Bitzon_model');
+        // load the view
+{           
+        $this->form_validation->set_rules('full_name', 'Full name', 'required');            
+        $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');            
+        $this->form_validation->set_rules('address_line_1', 'Address Line 1', 'required');          
+        $this->form_validation->set_rules('address_line_2', 'Address Line 2', 'required');          
+        $this->form_validation->set_rules('address_line_3', 'Address Line 3', '');          
+        $this->form_validation->set_rules('country', 'Country', '');            
+        $this->form_validation->set_rules('postcode_zip', 'Postcode/ZIP', '');          
+        $this->form_validation->set_rules('total_amount_promised', 'total_amount_promised', 'required|numeric');
+            
+        $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
+    
+        if ($this->form_validation->run() == FALSE) // validation hasn't been passed
+        {
+        $this->load->view('templates/header', $data);
+        $this->load->view('bitzonviews/index', $data);
+        $this->load->view('templates/footer', $data);
+        }
+        else // passed validation proceed to post success logic
+        {
+       
+            
 
-// perform validation
+ // Build the data to send to bitcoin payflow
 
-		$rule_config = array(
-		               array(
-                     'field'   => 'first_name',
-                     'label'   => 'First Name',
-                     'rules'   => 'required'
-                  ),
-               array(
-                     'field'   => 'last_name',
-                     'label'   => 'Last Name',
-                     'rules'   => 'required'
-                  ),
-               array(
-                     'field'   => 'address_1',
-                     'label'   => 'The first line of your address',
-                     'rules'   => 'required'
-                  ),   
-               array(
-                     'field'   => 'address_2',
-                     'label'   => 'The second line of your address',
-                     'rules'   => 'required'
-                  ),
-               array( 
-               		 'field'   => 'total_amount',
-               		 'label'   => 'total amount of bitcoins',
-               		 'rules'   => 'required|integer'
-               		));
-                 
-	$this->form_validation->set_rules($rule_config);
-	//data placment here
-$data = array('a' => 'b');
 
-	if ($this->form_validation->run() === FALSE)
-		{
-$data = array('a' => 'b');
-		$this->load->view('templates/header', $data);
-		$this->load->view('bitcoinpayflow/index', $data);
-		$this->load->view('templates/footer', $data);
-		}
+    $BCPFdata= array( //BitcoinPayFlow data
+    'foreign_order_id' => $unique_id = uniqid(),
+    'total_amount' => $this->input->post('total_amount'),
+    'custom_field' => '',
+    'auth_token' => $authtoken, // makie it the test auth token
+);
 
-	else
-// add authentication token and unique ID
-		{
-	$formreturnforbitcoinpayflow = array(
-	'foreign_order_id' => uniqid(),
-	'total_amount' => $this->input->post('total_amount'),
-	'custom_field' => '',
-	'auth_token' => $authtoken,
-		);
+// request the bitcoin address  using strigona's library
+    $payflow = new bitcoinpayflow_API();
+// Getting the data
+    $BCPFreturn = $payflow->orders($BCPFdata); 
 
-// request the bitcoin address
-	$payflow = new bitcoinpayflow_API();
+//strip the bitcoin address out sending it to the data variable
 
-	$orders = $payflow->orders($formreturnforbitcoinpayflow);
+    $data['bitcoin_address'] = $BCPFreturn['order']['bitcoin_address'];
 
-//strip the bitcoin address out
 
-	$data['bitcoin_address'] = $orders['order']['bitcoin_address'];
+     // build array for the model
 
-// send it to the view
+            $form_data = array(
+                            'full_name' => set_value('full_name'),
+                            'email_address' => set_value('email_address'),
+                            'address_line_1' => set_value('address_line_1'),
+                            'address_line_2' => set_value('address_line_2'),
+                            'address_line_3' => set_value('address_line_3'),
+                            'country' => set_value('country'),
+                            'postcode_zip' => set_value('postcode_zip'),
+                            'total_amount_promised' => set_value('total_amount_promised'),
+                            'uniqid' => $unique_id,
+                            'transaction_timestamp' => date('Y-m-d H:i:s'),
+                            'bitcoin_address_recieved' => $BCPFreturn['order']['bitcoin_address'],   
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('bitcoinpayflow/index', $data);
-		$this->load->view('templates/footer');
+                            // Need to add bitcoin address
+                        );
+//
+
+            // run insert model to write data to db
+        
+            if ($this->Bitzon_model->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
+            {
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('bitzonviews/index', $data);
+        $this->load->view('templates/footer');
+
+            }
+            else
+            {
+            echo 'An error occurred saving your information. Please try again later';
+            // Or whatever error handling is necessary
+            }
+        }
+    }
+    function success()
+    {
+            echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note
+            sessions have not been used and would need to be added in to suit your app';
+    }
+}
+
+
+
 // send it off to the model
-		}
-	}
+
 
     public function about(){
     $this->load->helper(array('form','url'));
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/header', $data); //returnData
         $this->load->view('static/about', $data);
         $this->load->view('templates/footer', $data);
     }
@@ -110,8 +135,27 @@ $data = array('a' => 'b');
 }
 
 
-	class bitcoinpayflow_API extends Bitzon
-	{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    class bitcoinpayflow_API extends Bitzon
+    {
 
  //API Configuration - setting constants for the curl url
     const API_URL = 'https://bitcoinpayflow.com/';
@@ -155,15 +199,15 @@ private function _pre_print($var, $head = NULL){
 }
 
     private function _buildParams($method, $params = array()){ /* looping through the first item of an array, which is also an array
-    	// not sure why it recieves the $method - james?
+        // not sure why it recieves the $method - james?
         takes:
         $params = array(
-		0 => array(
-			  "a"=>"b",),
-		2 => 3,
-		);
+        0 => array(
+              "a"=>"b",),
+        2 => 3,
+        );
 
-		Then returns [a=>b]
+        Then returns [a=>b]
         */
             foreach ($params[0] as $k => $v){
                 $options[$k] = $v;

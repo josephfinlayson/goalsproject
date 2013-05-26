@@ -38,6 +38,7 @@ $dbi = $Payment_Notification;
 $indata = $dbi['category'];
 //$indata=['Payment Notification']['bitcoin_address'];
 $this->load->database();
+$this->load->model('Bitzon_model');
 //$_POST = json_decode($_POST);
 //$posting = print_r($_POST);
 
@@ -53,9 +54,12 @@ $this->load->database();
         // )
 //strtotime($dbi['transaction_timestamp'])
 
-$data = array(
+
+
+
+$callback_data = array(
   // 'category' => $dbi['category'],
-   'transaction_timestamp' => date('Y-m-d H:i:s'),
+   'transaction_timestamp' => date('Y-m-d H:i:s', $dbi['transaction_timestamp']),
    //'signature' => $dbi['signature'],
    'bitcoins_recieved' => $dbi['amount'],
    'uniqid' => $dbi['foreign_order_id'], //primary key
@@ -65,9 +69,18 @@ $data = array(
    'bitcoin_address_recieved' => $dbi['bitcoin_address']
 );
 
-$this->db->insert('bitzon', $data);
+
+            if ($this->Bitzon_model->SaveCallback($callback_data) == TRUE) // the information has therefore been successfully saved in the db
+            {
 
 
+echo "data has been saved";
+
+            }
+            {
+
+            	echo "Data has not been saved";
+            }
 
 
 $this->load->view('callback/test'); 	
