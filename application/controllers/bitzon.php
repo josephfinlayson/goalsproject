@@ -82,10 +82,8 @@ public function index($data = NULL)
                             'postcode_zip' => set_value('postcode_zip'),
                             'total_amount_promised' => set_value('total_amount_promised'),
                             'uniqid' => $unique_id,
-                            'transaction_timestamp' => date('Y-m-d H:i:s'),
-                            'bitcoin_address_recieved' => $BCPFreturn['order']['bitcoin_address'],   
-
-                            // Need to add bitcoin address
+                            'order_timestamp' => date('Y-m-d H:i:s'),
+                            'bitcoin_address_displayed' => $BCPFreturn['order']['bitcoin_address'],   
                         );
 //
 
