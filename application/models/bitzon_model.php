@@ -40,9 +40,10 @@ public function __construct() {
 	if ($query->num_rows() > 0)
 
     {  
+
       	$this->db->update('bitzon', $callback_data, array('uniqid' => $callback_data['uniqid']));
     }
-
+    else
 	{      
 		$this->db->insert('bitzon', $callback_data);
 	}

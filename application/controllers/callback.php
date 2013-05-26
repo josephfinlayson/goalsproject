@@ -1,4 +1,6 @@
 <?php
+
+
 //These are the variable which will be returned as payment notifications
 
 /*
@@ -16,6 +18,7 @@ $_POST['signature']
 Class callback extends CI_controller {
 
 public function index() {
+	$this->load->database();
 //$step1 = '{"Payment Notification":{"category":"receive","transaction_timestamp":1307671121,"signature":"47e0b895c66c13aeb359485aa05f57704bf66d7ce47ed5c3fc1a35471ada823c","amount":"2.21","order_status":"open","foreign_order_id":"53","number_of_confirmations":1,"transaction_fee":"0.0","bitcoin_address":"1AFZ6Cv8q96rFaS9T8fR1y2j2CjNDcTIVD"}}';
 //$step2 = $step1 . '';
 
@@ -23,21 +26,43 @@ public function index() {
 // $indata = $myText = (string)$myVar;
 // json
 
-//$indata = file_get_contents('php://input');
-$indata = "Payment%20Notification[category]=receive&Payment%20Notification[transaction_timestamp]=1307671121&Payment%20Notification[signature]=47e0b895c66c13aeb359485aa05f57704bf66d7ce47ed5c3fc1a35471ada823c&Payment%20Notification[amount]=2.21&Payment%20Notification[foreign_order_id]=".uniqid()."&Payment%20Notification[number_of_confirmations]=1&Payment%20Notification[order_status]=open&Payment%20Notification[transaction_fee]=0.0&Payment%20Notification[bitcoin_address]=1AFZ6Cv8q96rFaS9T8fR1y2j2CjNDcTIVD";
+$indata = file_get_contents('php://input'); //live
+
+//$indata = "Payment%20Notification[category]=receive&Payment%20Notification[transaction_timestamp]=1307671121&Payment%20Notification[signature]=47e0b895c66c13aeb359485aa05f57704bf66d7ce47ed5c3fc1a35471ada823c&Payment%20Notification[amount]=2.21&Payment%20Notification[foreign_order_id]=".uniqid()."&Payment%20Notification[number_of_confirmations]=1&Payment%20Notification[order_status]=open&Payment%20Notification[transaction_fee]=0.0&Payment%20Notification[bitcoin_address]=1AFZ6Cv8q96rFaS9T8fR1y2j2CjNDcTIVD";
 
 //$indata=json_decode(parse_str($indata),TRUE);
 
-$indata = str_replace("%20", "_", $indata);
-$indata = parse_str($indata);
-//$indata = json_decode($step1,TRUE);
-//"Payment%20Notification[category]=receive&Payment%20Notification[transaction_timestamp]=1307671121&Payment%20Notification[signature]=47e0b895c66c13aeb359485aa05f57704bf66d7ce47ed5c3fc1a35471ada823c&Payment%20Notification[amount]=2.21&Payment%20Notification[foreign_order_id]=53&Payment%20Notification[number_of_confirmations]=1&Payment%20Notification[order_status]=open&Payment%20Notification[transaction_fee]=0.0&Payment%20Notification[bitcoin_address]=1AFZ6Cv8q96rFaS9T8fR1y2j2CjNDcTIVD"
-//$fullname = $indata['Payment Notification']['bitcoin_address'];
-print_r(get_defined_vars());
-$dbi = $Payment_Notification;
+// $indata = str_replace("%20", "_", $indata);
+// $indata = parse_str($indata);
+
+$indata = (json_decode($indata, TRUE));
+
+
+// $this->db->set('uniqid', $indata);
+// $this->db->insert('bitzon');
+
+
+// echo "THIS IS ALL DEFINED VARS";
+// print_r(get_defined_vars());
+
+// echo "THIS IS INDATA";
+// print_r($indata);
+
+// echo "THIS IS PAYMENT NOTIFICATION";
+
+// print_r($Payment_Notification);
+
+
+// echo "THIS IS PAYMENT NOTIFICATION array";
+
+// print_r($indata['Payment_Notification']);
+
+$dbi = $indata['Payment Notification'];
+
+print_r($dbi);
 $indata = $dbi['category'];
 //$indata=['Payment Notification']['bitcoin_address'];
-$this->load->database();
+
 $this->load->model('Bitzon_model');
 //$_POST = json_decode($_POST);
 //$posting = print_r($_POST);
@@ -70,20 +95,23 @@ $callback_data = array(
 );
 
 
+
+
             if ($this->Bitzon_model->SaveCallback($callback_data) == TRUE) // the information has therefore been successfully saved in the db
             {
 
 
-echo "data has been saved";
+			echo "data has been saved";
 
             }
+            else
             {
 
-            	echo "Data has not been saved";
+            echo "Data has not been saved";
             }
 
 
-$this->load->view('callback/test'); 	
+//$this->load->view('callback/test'); 	
 
 
 	
