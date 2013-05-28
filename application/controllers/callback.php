@@ -4,25 +4,28 @@
 //These are the variable which will be returned as payment notifications
 
 /*
-$_POST['amount']
-$_POST['bitcoin_address']
-$_POST['category']
-$_POST['foreign_order_id']
-$_POST['number_of_confirmations']
-$_POST['order_status']
-$_POST['transaction_fee']
-$_POST['transaction_timestamp']
-$_POST['signature']
+$dbi['amount']
+$dbi['bitcoin_address']
+$dbi['category']
+$dbi['foreign_order_id']
+$dbi['number_of_confirmations']
+$dbi['order_status']
+$dbi['transaction_fee']
+$dbi['transaction_timestamp']
+$dbi['signature']
 */
 
 Class callback extends CI_controller {
 
+
 public function index() {
+
+	$apikey = '343352b4ac38e78c31e3039a719403a6'; // Test 4f7f0836cc321bfd78303508bd154a00 //Live
 	$this->load->database();
 //$step1 = '{"Payment Notification":{"category":"receive","transaction_timestamp":1307671121,"signature":"47e0b895c66c13aeb359485aa05f57704bf66d7ce47ed5c3fc1a35471ada823c","amount":"2.21","order_status":"open","foreign_order_id":"53","number_of_confirmations":1,"transaction_fee":"0.0","bitcoin_address":"1AFZ6Cv8q96rFaS9T8fR1y2j2CjNDcTIVD"}}';
 //$step2 = $step1 . '';
 
-//$step1 = strval($_POST);
+//$step1 = strval($dbi);
 // $indata = $myText = (string)$myVar;
 // json
 
@@ -64,8 +67,9 @@ $indata = $dbi['category'];
 //$indata=['Payment Notification']['bitcoin_address'];
 
 $this->load->model('Bitzon_model');
-//$_POST = json_decode($_POST);
-//$posting = print_r($_POST);
+//$dbi = json_decode($dbi);
+//$posting = print_r($dbi);
+
 
         //     [category] => receive
         //     [transaction_timestamp] => 1307671121
@@ -80,19 +84,29 @@ $this->load->model('Bitzon_model');
 //strtotime($dbi['transaction_timestamp'])
 
 
+	$secureString = 'amount=' . $dbi['amount'] . 'bitcoin_address=' . $dbi['bitcoin_address']
+	                . 'category=' . $dbi['category'] . 'foreign_order_id=' . $dbi['foreign_order_id']
+	                . 'number_of_confirmations=' . $dbi['number_of_confirmations'] . 'order_status='
+	                . $dbi['order_status'] . 'transaction_fee=' . $dbi['transaction_fee']
+	                . 'transaction_timestamp=' . $dbi['transaction_timestamp'];
+	
+	$secureString = hash('sha256', $apikey . $secureString);
+	
+	if ($secureString == $dbi['signature']){
+	    
+	    //Save the results of the POST to a database
 
-
-$callback_data = array(
-  // 'category' => $dbi['category'],
-   'transaction_timestamp' => date('Y-m-d H:i:s', $dbi['transaction_timestamp']),
-   //'signature' => $dbi['signature'],
-   'bitcoins_recieved' => $dbi['amount'],
-   'uniqid' => $dbi['foreign_order_id'], //primary key
-   'number_of_confirmations' => $dbi['number_of_confirmations'],
-   'order_status' => $dbi['order_status'],
-   'transaction_fee' => $dbi['transaction_fee'],
-   'bitcoin_address_recieved' => $dbi['bitcoin_address']
-);
+		$callback_data = array(
+	    // 'category' => $dbi['category'],
+	   'transaction_timestamp' => date('Y-m-d H:i:s', $dbi['transaction_timestamp']),
+	   //'signature' => $dbi['signature'],
+	   'bitcoins_recieved' => $dbi['amount'],
+	   'uniqid' => $dbi['foreign_order_id'], //primary key
+	   'number_of_confirmations' => $dbi['number_of_confirmations'],
+	   'order_status' => $dbi['order_status'],
+	   'transaction_fee' => $dbi['transaction_fee'],
+	   'bitcoin_address_recieved' => $dbi['bitcoin_address']
+	);
 
 
 
@@ -110,6 +124,14 @@ $callback_data = array(
             echo "Data has not been saved";
             }
 
+	    
+	} else {
+	    die('Unauthorized');
+	}
+	
+	}
+
+
 
 //$this->load->view('callback/test'); 	
 
@@ -119,15 +141,15 @@ $callback_data = array(
 	
 	
 	
-	// $secureString = 'amount=' . $_POST['amount'] . 'bitcoin_address=' . $_POST['bitcoin_address']
-	//                 . 'category=' . $_POST['category'] . 'foreign_order_id=' . $_POST['foreign_order_id']
-	//                 . 'number_of_confirmations=' . $_POST['number_of_confirmations'] . 'order_status='
-	//                 . $_POST['order_status'] . 'transaction_fee=' . $_POST['transaction_fee']
-	//                 . 'transaction_timestamp=' . $_POST['transaction_timestamp'];
+	// $secureString = 'amount=' . $dbi['amount'] . 'bitcoin_address=' . $dbi['bitcoin_address']
+	//                 . 'category=' . $dbi['category'] . 'foreign_order_id=' . $dbi['foreign_order_id']
+	//                 . 'number_of_confirmations=' . $dbi['number_of_confirmations'] . 'order_status='
+	//                 . $dbi['order_status'] . 'transaction_fee=' . $dbi['transaction_fee']
+	//                 . 'transaction_timestamp=' . $dbi['transaction_timestamp'];
 	
 	// $secureString = hash('sha256','Your API Key' . $secureString);
 	
-	// if ($secureString == $_POST['signature']){
+	// if ($secureString == $dbi['signature']){
 	    
 	//     //Save the results of the POST to a database
 	//     //-----refer to variables listed at beginning of script
@@ -139,6 +161,4 @@ $callback_data = array(
 	// }
 
 //$dbconn2 = pg_connect("host=localhost port=5432 dbname=mydb");
-
-	}
-}	
+}

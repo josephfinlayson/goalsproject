@@ -16,6 +16,10 @@ class Bitzon extends CI_controller
 public function index($data = NULL)
 
     {
+
+        // Set title
+
+        $data['title'] = "Home";
         //declare constants
         
         $authtoken = '343352b4ac38e78c31e3039a719403a6';// <- Test token //'4f7f0836cc321bfd78303508bd154a00'; <- live token
@@ -118,16 +122,19 @@ public function index($data = NULL)
 
 
     public function about(){
-    $this->load->helper(array('form','url'));
+
+        $data['title'] = "About";
+        $this->load->helper(array('form','url'));
         $this->load->view('templates/header', $data); //returnData
-        $this->load->view('static/about', $data);
+        $this->load->view('bitzonviews/about', $data);
         $this->load->view('templates/footer', $data);
     }
 
     public function contact(){
-            $this->load->helper(array('form','url'));
+        $data['title'] = "Contact";
+        $this->load->helper(array('form','url'));
         $this->load->view('templates/header', $data);
-        $this->load->view('static/about', $data);
+        $this->load->view('bitzonviews/about', $data);
         $this->load->view('templates/footer', $data);
 }
 }
