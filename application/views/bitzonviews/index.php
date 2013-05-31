@@ -13,11 +13,27 @@
         <?php echo anchor('bitzon/about',"Learn more", array('class'=>"btn btn-primary btn-large", 'style'=>"display:inline; float:right")); ?> </p>
       </div>
 
-      <!-- Example row of columns -->
-     
+      <!-- First enter the ASIN, then do an ajax lookup -->
 
-    <h1>yay bitcoins</h1>
     <h2> Make an order </h2>
+    <?php $attributes = array('class' => '', 'id' => '');
+
+    echo form_open('bitzon/prodlookup', $attributes) ?>
+    
+    <p>
+        <label for="ASIN">ASIN <span class="required">*</span></label>
+        <?php echo form_error('full_name'); ?>
+        <input id="asin" type="text" name="asin"  value="<?php echo set_value('asin'); ?>"  />
+    </p>                                             
+    <p> 
+        <?php $attributes =  array('class' => "btn btn-success"); ?>    
+        <?php echo form_submit( $attributes, 'Submit'); ?>
+    </p>
+
+<?php echo form_close(); ?>
+
+
+<!-- show a picture of the product, then open up the main form -->
 
 
 <?php $attributes = array('class' => '', 'id' => '');

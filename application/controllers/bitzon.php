@@ -137,16 +137,38 @@ public function index($data = NULL)
         $this->load->view('bitzonviews/about', $data);
         $this->load->view('templates/footer', $data);
 }
+
+public function products($asin){
+
+
+    function __construct()
+    {
+        error_reporting(E_ALL);
+        parent::__construct();
+        $this->load->library('amazon_api');
+        $this->load->helper('form');
+        $this->load->library('pagination');
+    }
+ 
+ 
+     function index()
+    {
+ 
+ 
+    try{
+    $result=$this->amazon_api->getItemByAsin("B008UAAE44");
+             }
+    catch(Exception $e)
+    {
+        echo $e->getMessage();
+    }
+ 
+     $JSON = json_encode($result);
+     echo $JSON;
+
+
 }
-
-
-
-
-
-
-
-
-
+}}
 
 
 
