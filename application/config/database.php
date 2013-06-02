@@ -39,30 +39,47 @@
 |							- good for ensuring strict SQL while developing
 |
 | The $active_group variable lets you choose which connection group to
-| make active.  By default there is only one group (the 'default' group).
+| make active.  By default there is only one group (the 'heroku' group).
 |
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
 
-$active_group = 'default';
+$active_group = 'heroku';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'postgres';
-$db['default']['password'] = 'hammann';
-$db['default']['database'] = 'goalsproject';
-$db['default']['dbdriver'] = 'postgre';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = FALSE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
+$db['heroku']['hostname'] = 'localhost';
+$db['heroku']['username'] = 'postgres';
+$db['heroku']['password'] = 'hammann';
+$db['heroku']['database'] = 'goalsproject';
+$db['heroku']['dbdriver'] = 'postgre';
+$db['heroku']['dbprefix'] = '';
+$db['heroku']['pconnect'] = FALSE;
+$db['heroku']['db_debug'] = TRUE;
+$db['heroku']['cache_on'] = FALSE;
+$db['heroku']['cachedir'] = '';
+$db['heroku']['char_set'] = 'utf8';
+$db['heroku']['dbcollat'] = 'utf8_general_ci';
+$db['heroku']['swap_pre'] = '';
+$db['heroku']['autoinit'] = TRUE;
+$db['heroku']['stricton'] = FALSE;
+
+$db['heroku']['hostname'] = 'ec2-23-21-130-189.compute-1.amazonaws.com';
+$db['heroku']['username'] = 'ebutsdyulteauq';
+$db['heroku']['password'] = 'eZqy8rrAhJMkRdpQPBWDnJ97Nd';
+$db['heroku']['database'] = 'dfa7u6atu51p4d';
+$db['heroku']['dbdriver'] = 'postgre';
+$db['heroku']['dbprefix'] = '';
+$db['heroku']['pconnect'] = FALSE;
+$db['heroku']['db_debug'] = TRUE;
+$db['heroku']['cache_on'] = FALSE;
+$db['heroku']['cachedir'] = '';
+$db['heroku']['char_set'] = 'utf8';
+$db['heroku']['dbcollat'] = 'utf8_general_ci';
+$db['heroku']['swap_pre'] = '';
+$db['heroku']['autoinit'] = TRUE;
+$db['heroku']['stricton'] = FALSE;
+
 
 
 /* End of file database.php */
