@@ -45,8 +45,8 @@
 // $route['news/(:any)'] = 'news/view/$1';
 
 // $route['news'] = 'news';
-$route['default_controller'] = '/bitzon/index';
-$route['bitzon/index'] = '/bitzon/index';
+$route['default_controller'] = '/goals/index';
+$route['goalsproject/index'] = '/goalsproject/index';
 
 
 /* End of file routes.php */

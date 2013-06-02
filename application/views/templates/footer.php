@@ -1,4 +1,10 @@
-<strong>&copy; 2013 - Bitzon</strong>	
+
+</div>
+<hr>
+</div>
+
+<strong>Copyleft, hosted on github @ Jalvani:goalsproject</strong>	
+</hr>
 </body>
 
     <script src="<?=base_url()?>js/jquery.js"></script>
