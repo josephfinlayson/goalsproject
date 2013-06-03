@@ -19,7 +19,7 @@
         padding-bottom: 40px;
       }
     </style>
-    <link href="<?=base_url()?>css/bootstrap-responsive.css" rel="stylesheet">
+ <link href="<?=base_url()?>css/bootstrap-responsive.css" rel="stylesheet"> 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -40,37 +40,29 @@
 
 
 
-
+     
    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
           <?php echo anchor('goals/index',"Goals Project", array('class' => 'brand'));?>
+
           <div class="nav-collapse collapse">
             <ul class="nav">
-			<li <? if ($this->uri->uri_string == "goals/index") {echo "class='active'";}?> > <?php echo anchor('goals/index',"Home");?> </li>
-			<li <? if ($this->uri->segment(2) == "questions") {echo "class='active'";}?> > <?php 
-
-$url = 'goals/questions/'.$this->uri->segment(3);
-
-
-      echo anchor($url,"Questions"); ?> </li>
-			<li <? if ($this->uri->segment(2) == "answers") {echo "class='active'";}?> > <?php 
-
-
-
-$url = 'goals/answers/'.$this->uri->segment(3);
-      echo anchor($url,"Answers"); ?></li>
-
+              <li<? if ($this->uri->uri_string == "goals/index") {echo "class='active'";}?>> <?php echo anchor('goals/index',"Home");?> </li>
+              <li<? if ($this->uri->segment(2) == "questions") {echo "class='active'";}?>> <?php 
+                $url = 'goals/questions/'.$this->uri->segment(3);
+                echo anchor($url,"Questions"); ?> </li>
+              <li<? if ($this->uri->segment(2) == "answers") {echo "class='active'";}?>> <?php 
+                $url = 'goals/answers/'.$this->uri->segment(3);
+                echo anchor($url,"Answers"); ?></li>
+            </ul>
           </div>  <!--/.nav-collapse -->
         </div>
       </div>
   </div>
-
-
-
 	
