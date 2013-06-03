@@ -21,6 +21,7 @@ class goals extends CI_controller
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->model('goalsproject_model');
+        $this->load->helper('typography');
     }   
 
 public function index(){
@@ -90,11 +91,11 @@ public function questions ($params = NULL) {
                             'q1' => set_value('q1'),
                             'q2' => set_value('q2'),
                             'q3' => set_value('q3'),
-                            'a1' => set_value('a1'),
-                            'a2' => set_value('a2'),
-                            'a3' => set_value('a3'),
+                            'a1' => auto_typography(set_value('a1')),
+                            'a2' => auto_typography(set_value('a2')),
+                            'a3' => auto_typography(set_value('a3')),
                             'sq' => set_value('sq'),
-                            'sa' => set_value('sa'),
+                            'sa' => auto_typography(set_value('sa')),
                             'uniqid' => uniqid(),
                             'timestamp' => date(DATE_RSS) 
                         );
