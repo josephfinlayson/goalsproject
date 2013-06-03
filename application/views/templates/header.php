@@ -53,11 +53,11 @@
 
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li<? if ($this->uri->uri_string == "goals/index") {echo "class='active'";}?>> <?php echo anchor('goals/index',"Home");?> </li>
-              <li<? if ($this->uri->segment(2) == "questions") {echo "class='active'";}?>> <?php 
+              <li <? if ($this->uri->uri_string == "goals/index") {echo "class='active'";}?>> <?php echo anchor('goals/index',"Home");?> </li>
+              <li <? if ($this->uri->segment(2) == "questions") {echo "class='active'";}?>> <?php 
                 $url = 'goals/questions/'.$this->uri->segment(3);
                 echo anchor($url,"Questions"); ?> </li>
-              <li<? if ($this->uri->segment(2) == "answers") {echo "class='active'";}?>> <?php 
+              <li <? if ($this->uri->segment(2) == "answers") {echo "class='active'";}?>> <?php 
                 $url = 'goals/answers/'.$this->uri->segment(3);
                 echo anchor($url,"Answers"); ?></li>
             </ul>
