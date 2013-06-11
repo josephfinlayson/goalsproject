@@ -5,63 +5,32 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">People</li>
-              <li <? if ($this->uri->segment(3) == "gayan") {echo " class='active'";}?> ><a href=
-              	<?php 
+<?php
+                $people = array('gayan','joe','phil','noam','miceal');
 
 
+
+foreach ($people as $aperson) {
+  # code...
+
+             echo"<li";?> <? if ($this->uri->segment(3) == $aperson) {echo " class='active'";}?> ><a href=
+                <?php 
+              
     $uri = $this->uri->segment(2);
 
               	switch ($uri) {
               		case 'answers':
-              			echo base_url()."index.php/goals/answers/gayan";
+              			echo base_url()."/".index_url()."/goals/answers/".$aperson;
               			break;
               		
               		default:
-              			echo base_url()."index.php/goals/questions/gayan";
+              			echo base_url()."index.php/goals/questions/".$aperson;
               			break;
-              	} ;
+              	} 
+                echo "> ". ucwords($aperson)."</a></li>";
+}
 
 ?>
-
->Gayan</a></li>
-              <li <? if ($this->uri->segment(3) == "joe") {echo " class='active'";}?>><a href=
-  <?php 
-
-
-    $uri = $this->uri->segment(2);
-
-                switch ($uri) {
-                  case 'answers':
-                    echo base_url()."index.php/goals/answers/joe";
-                    break;
-                  
-                  default:
-                    echo base_url()."index.php/goals/questions/joe";
-                    break;
-                } ;
-
-?>
-                >Joe</a></li>
-              <li <? if ($this->uri->segment(3) == "phil") {echo " class='active'";}?> ><a href=
-
-  <?php 
-
-
-    $uri = $this->uri->segment(2);
-
-                switch ($uri) {
-                  case 'answers':
-                    echo base_url()."index.php/goals/answers/phil";
-                    break;
-                  
-                  default:
-                    echo base_url()."index.php/goals/questions/phil";
-                    break;
-                } ;
-
-?>
-
-                >Phil</a></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

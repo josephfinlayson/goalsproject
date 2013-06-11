@@ -48,21 +48,21 @@
 $active_group = 'heroku';
 $active_record = TRUE;
 
-$db['heroku']['hostname'] = 'localhost';
-$db['heroku']['username'] = 'postgres';
-$db['heroku']['password'] = 'hammann';
-$db['heroku']['database'] = 'goalsproject';
-$db['heroku']['dbdriver'] = 'postgre';
-$db['heroku']['dbprefix'] = '';
-$db['heroku']['pconnect'] = FALSE;
-$db['heroku']['db_debug'] = TRUE;
-$db['heroku']['cache_on'] = FALSE;
-$db['heroku']['cachedir'] = '';
-$db['heroku']['char_set'] = 'utf8';
-$db['heroku']['dbcollat'] = 'utf8_general_ci';
-$db['heroku']['swap_pre'] = '';
-$db['heroku']['autoinit'] = TRUE;
-$db['heroku']['stricton'] = FALSE;
+$db['local']['hostname'] = 'localhost';
+$db['local']['username'] = 'postgres';
+$db['local']['password'] = 'hammann';
+$db['local']['database'] = 'goalsproject';
+$db['local']['dbdriver'] = 'postgre';
+$db['local']['dbprefix'] = '';
+$db['local']['pconnect'] = FALSE;
+$db['local']['db_debug'] = TRUE;
+$db['local']['cache_on'] = FALSE;
+$db['local']['cachedir'] = '';
+$db['local']['char_set'] = 'utf8';
+$db['local']['dbcollat'] = 'utf8_general_ci';
+$db['local']['swap_pre'] = '';
+$db['local']['autoinit'] = TRUE;
+$db['local']['stricton'] = FALSE;
 
 $db['heroku']['hostname'] = 'ec2-23-21-130-189.compute-1.amazonaws.com';
 $db['heroku']['username'] = 'ebutsdyulteauq';
