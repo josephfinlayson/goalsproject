@@ -20,7 +20,7 @@ class goals extends CI_controller
        $this->load->database();
         $this->load->helper('form');
         $this->load->helper('url');
-       //$this->load->model('goalsproject_model');
+       $this->load->model('goalsproject_model');
         $this->load->helper('typography');
     }   
 
@@ -55,6 +55,12 @@ public function questions ($params = NULL) {
             $this->load->view('goalsprojectviews/questions', $data);
                 break;
             case 'phil':
+            $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
+            $this->load->view('goalsprojectviews/questions', $data);
+            case 'noam':
+            $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
+            $this->load->view('goalsprojectviews/questions', $data);
+              case 'miceal':
             $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
             $this->load->view('goalsprojectviews/questions', $data);
                 break;
