@@ -19,7 +19,7 @@ foreach ($people as $aperson) {
 
               	switch ($uri) {
               		case 'answers':
-              			echo base_url()."/"."index_page()"."/goals/answers/".$aperson;
+              			echo base_url()."/".index_page()."/goals/answers/".$aperson;
               			break;
               		
               		default:
