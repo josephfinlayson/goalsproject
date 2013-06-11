@@ -147,6 +147,12 @@ public function answers ($params = NULL) {
             case 'phil':
             $data['query']  = $this->goalsproject_model->getanswers($params); //params = person name &
             $this->load->view('goalsprojectviews/answers', $data);
+            case 'noam':
+            $data['query']  = $this->goalsproject_model->getanswers($params); //params = person name &
+            $this->load->view('goalsprojectviews/answers', $data);
+            case 'miceal':
+            $data['query']  = $this->goalsproject_model->getanswers($params); //params = person name &
+            $this->load->view('goalsprojectviews/answers', $data);
                 break;
             default:
             $this->load->view('goalsprojectviews/answersdefault');
