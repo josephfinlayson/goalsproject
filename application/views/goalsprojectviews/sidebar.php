@@ -11,7 +11,6 @@
 
 
 foreach ($people as $aperson) {
-  # code...
 
              echo"<li";?> <? if ($this->uri->segment(3) == $aperson) {echo " class='active'";}?> ><a href=
                 <?php 
@@ -20,7 +19,7 @@ foreach ($people as $aperson) {
 
               	switch ($uri) {
               		case 'answers':
-              			echo base_url()."/".index_url()."/goals/answers/".$aperson;
+              			echo base_url()."/"."index_page()"."/goals/answers/".$aperson;
               			break;
               		
               		default:

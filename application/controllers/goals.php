@@ -17,10 +17,10 @@ class goals extends CI_controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-       $this->load->database();
+        $this->load->database();
         $this->load->helper('form');
         $this->load->helper('url');
-       $this->load->model('goalsproject_model');
+        $this->load->model('goalsproject_model');
         $this->load->helper('typography');
     }   
 
