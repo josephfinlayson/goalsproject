@@ -13,6 +13,7 @@ $orders = $payflow->orders(array(
 
 class goals extends CI_controller
 {
+
     function __construct()
     {
         parent::__construct();
@@ -22,6 +23,7 @@ class goals extends CI_controller
         $this->load->helper('url');
         $this->load->model('goalsproject_model');
         $this->load->helper('typography');
+        $this->load->vars($globals['people'] = array('gayan','noam','miceal','phil','joe'))
     }   
 
 public function index(){
@@ -45,28 +47,11 @@ public function questions ($params = NULL) {
         $this->load->view('goalsprojectviews/sidebar');
         
 
-        switch ($params) {
-            case 'gayan':
-            $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
-            $this->load->view('goalsprojectviews/questions', $data);
-                break;
-            case 'joe':
-            $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
-            $this->load->view('goalsprojectviews/questions', $data);
-                break;
-            case 'phil':
-            $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
-            $this->load->view('goalsprojectviews/questions', $data);
-            case 'noam':
-            $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
-            $this->load->view('goalsprojectviews/questions', $data);
-              case 'miceal':
-            $data['query'] = $this->goalsproject_model->retrieveqs($params); //params = person name &
-            $this->load->view('goalsprojectviews/questions', $data);
-                break;
-            default:
+if (in_array($params, $people))
+        {$data['query'] = $this->goalsproject_model->getanswers($params); //params = person name &
+            $this->load->view('goalsprojectviews/questions', $data);}
+        else{
             $this->load->view('goalsprojectviews/questionsdefault');
-                break;
         }
         $this->load->view('templates/footer', $data);
     }
@@ -134,30 +119,13 @@ public function answers ($params = NULL) {
         $data['title'] = 'Answers for '.$params;
         $this->load->view('templates/header', $data);
         $this->load->view('goalsprojectviews/sidebar');
-
-        switch ($params) {
-            case 'gayan':
-            $data['query'] = $this->goalsproject_model->getanswers($params); //params = person name &
-            $this->load->view('goalsprojectviews/answers', $data);
-                break;
-            case 'joe':
-            $data['query']  = $this->goalsproject_model->getanswers($params); //params = person name &
-            $this->load->view('goalsprojectviews/answers', $data);
-                break;
-            case 'phil':
-            $data['query']  = $this->goalsproject_model->getanswers($params); //params = person name &
-            $this->load->view('goalsprojectviews/answers', $data);
-            case 'noam':
-            $data['query']  = $this->goalsproject_model->getanswers($params); //params = person name &
-            $this->load->view('goalsprojectviews/answers', $data);
-            case 'miceal':
-            $data['query']  = $this->goalsproject_model->getanswers($params); //params = person name &
-            $this->load->view('goalsprojectviews/answers', $data);
-                break;
-            default:
+if (in_array($params, $people))
+        {$data['query'] = $this->goalsproject_model->getanswers($params); //params = person name &
+            $this->load->view('goalsprojectviews/answers', $data);}
+        else{
             $this->load->view('goalsprojectviews/answersdefault');
-                break;
         }
+
         $this->load->view('templates/footer');
     }
 
