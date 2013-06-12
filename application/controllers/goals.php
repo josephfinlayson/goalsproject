@@ -23,7 +23,7 @@ class goals extends CI_controller
         $this->load->helper('url');
         $this->load->model('goalsproject_model');
         $this->load->helper('typography');
-        $this->load->vars($globals['people'] = array('gayan','noam','miceal','phil','joe'))
+        $this->load->vars($globals['people'] = array('gayan','noam','miceal','phil','joe'));
     }   
 
 public function index(){
