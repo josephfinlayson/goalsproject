@@ -6,7 +6,7 @@
             <ul class="nav nav-list">
               <li class="nav-header">People</li>
 <?php
-                $people = array('gayan','joe','phil','noam','miceal');
+            
 
 
 
