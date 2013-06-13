@@ -1,9 +1,9 @@
 <?
 class Emailtest extends CI_controller{
-function sendConfirmationMail(){
+function sendConfirmationMail($q1){
 	// send email to everyone else when goals are updated
-
-                            // 'person' => set_value('person'),
+$array=array(
+                            'person' => 'person'
                             // 'q1' => set_value('q1'),
                             // 'q2' => set_value('q2'),
                             // 'q3' => set_value('q3'),
@@ -14,29 +14,29 @@ function sendConfirmationMail(){
                             // 'sa' => auto_typography(set_value('sa')),
                             // 'uniqid' => uniqid(),
                             // 'timestamp' => date(DATE_RSS) 
+);
+extract($array);
 
-// extract($array);
+	$email = "Hello Lads,
 
-// 	$email = "Hello Lads,
+Some new goals have been uploaded from $person . Good luck to him! 
 
-// Some new goals have been uploaded from {$person}. Good luck to him! 
+They want to achieve the following:
 
-// They want to achieve the following:
+$q1
+$a1
+$q2
+$a2
+$q3
 
-// $q1
-// $a1
-// $q2
-// $a2
-// $q3
+And they've reflect on the following
+$sq
+$sa
 
-// And they've reflect on the following
-// $sq
-// $sa
+Maybe it's time that you considered updating your goals?
 
-// Maybe it's time that you considered updating your goals?
-
-// Sincerely,
-// the goals tracker";
+Sincerely,
+the goals tracker";
 
 $config = Array(
     'protocol' => 'smtp',
@@ -55,7 +55,7 @@ $this->email->to('joseph.finlayson@gmail.com');
 
 $this->email->subject("has uploaded some new goals");
 
-$this->email->message("this is a test"); 
+$this->email->message($email); 
 
 
 if($this->email->send())

@@ -26,7 +26,7 @@ class goals extends CI_controller
         $this->load->helper('typography');
         $this->data = array();
         $this->data['people'] = array('gayan','noam','miceal','phil','joe');
-        $this->load->library('utils111');
+        $this->load->library('utils');
     }   
 
 // public function getUsers() {
@@ -50,6 +50,7 @@ public function questions ($params = NULL) {
     $data['title'] =  'questions';
     $this->load->view('templates/header', $data);
     $this->load->view('goalsprojectviews/sidebar', $data);
+
 
 
 if (in_array($params, $data['people']))
@@ -117,7 +118,9 @@ public function answers ($params = NULL) {
                             'timestamp' => date(DATE_RSS) 
                         );
             // send email
-           $this->utils111->sendConfirmationMail(array('q1'=>'asdsad'));
+
+           $this->utils->sendconfirmationmail($form_data);
+
             
 
             // run insert model to write data to db

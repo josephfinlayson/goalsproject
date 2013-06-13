@@ -1,6 +1,5 @@
- <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
-class utils111
+<?php
+class Utils
 	{
 
 
@@ -8,9 +7,8 @@ class utils111
 function sendConfirmationMail($array){
     $CI =& get_instance();
 
-	// send email to everyone else when goals are updated
-
-                            // 'person' => set_value('person'),
+	//$array=array(
+      //                      'person' => 'person'
                             // 'q1' => set_value('q1'),
                             // 'q2' => set_value('q2'),
                             // 'q3' => set_value('q3'),
@@ -21,14 +19,14 @@ function sendConfirmationMail($array){
                             // 'sa' => auto_typography(set_value('sa')),
                             // 'uniqid' => uniqid(),
                             // 'timestamp' => date(DATE_RSS) 
-
+//);
 extract($array);
 
-	$email = "Hello Lads,
+    $email = "Hello Lads,
 
-Some new goals have been uploaded from {$person}. Good luck to him! 
+Some new goals have been uploaded from ".ucwords($person).". Good luck to him! 
 
-They want to achieve the following:
+He's said the following:
 
 $q1
 $a1
@@ -36,9 +34,11 @@ $q2
 $a2
 $q3
 
-And they've reflect on the following
+And he's reflected on the following
+
 $sq
 $sa
+
 
 Maybe it's time that you considered updating your goals?
 
@@ -47,24 +47,30 @@ the goals tracker";
 
 $config = Array(
     'protocol' => 'smtp',
-    'smtp_host' => 'ssl://smtp.gmail.com',
+    'smtp_host' => "ssl://smtp.googlemail.com",
     'smtp_port' => 465,
-    'smtp_user' => 'boundlesstracker@gmail.com.',
+    'smtp_user' => 'boundlesstracker@gmail.com',
     'smtp_pass' => 'g0alstracker',
     'mailtype'  => 'text', 
-    'charset'   => 'iso-8859-1'
+    'charset'   => 'iso-8859-1',
+    'send_multipart' => FALSE
 );
 $CI->load->library('email', $config);
 $CI->email->set_newline("\r\n");
 
-$CI->email->from('boundlesstracker@gmail.com', 'Web Site');
-$CI->email->to('joseph.finlayson@gmail.com');
+$CI->email->from('boundlesstracker@gmail.com', 'Goals Tracker');
+$CI->email->to('joseph.finlayson@gmail.com', 'gayan.r.samarasinghe@gmail.com', 'phillipjamesdickinson@hotmail.com');
 
-$CI->email->subject(ucwords($person)."has uploaded some new goals");
+$CI->email->subject(ucwords($person)." has uploaded some new goals");
 
 $CI->email->message($email); 
 
-$CI->email->send();
+
+if($CI->email->send())
+
+    {echo "true";}
+else {echo "false";
+echo $CI->email->print_debugger();}
 }
 
 function sendUpdateEmail($array){
@@ -74,3 +80,4 @@ function sendUpdateEmail($array){
 }
 
 }
+?>
