@@ -26,13 +26,15 @@ class goals extends CI_controller
         $this->load->helper('typography');
         $this->data = array();
         $this->data['people'] = array('gayan','noam','miceal','phil','joe');
-
+        $this->load->library('utils111');
     }   
 
 // public function getUsers() {
 
 // echo(arg1)
 // }
+
+
 public function index(){
         $data = $this->data;
         $data['title'] =  'home';
@@ -45,25 +47,42 @@ public function index(){
 
 public function questions ($params = NULL) {
     $data = $this->data;
-    //helpers
+    $data['title'] =  'questions';
+    $this->load->view('templates/header', $data);
+    $this->load->view('goalsprojectviews/sidebar', $data);
 
-    $this->load->helper('url');
-
-        $data['title'] =  'questions';
-        $this->load->view('templates/header', $data);
-        $this->load->view('goalsprojectviews/sidebar', $data);
-        
 
 if (in_array($params, $data['people']))
         {$data['query'] = $this->goalsproject_model->getanswers($params); //params = person name &
             $this->load->view('goalsprojectviews/questions', $data);}
-        else{
+        else
+        {
             $this->load->view('goalsprojectviews/questionsdefault');
         }
+        
         $this->load->view('templates/footer', $data);
     }
+
+public function answers ($params = NULL) {
+        $data = $this->data;
+        $data['title'] = 'Answers for '.$params;
+        $this->load->view('templates/header', $data);
+        $this->load->view('goalsprojectviews/sidebar',$data);
+        
+        if (in_array($params, $data['people']))
+            {
+                $data['query'] = $this->goalsproject_model->getanswers($params); //params = person name &
+                $this->load->view('goalsprojectviews/answers', $data);
+            }
+        else
+            {
+                $this->load->view('goalsprojectviews/answersdefault');
+            }
+
+        $this->load->view('templates/footer');
+    }
     function questions_form()
-    {           
+    {              $data = $this->data;
         $this->form_validation->set_rules('person', 'person', '');          
         $this->form_validation->set_rules('q1', 'Q1', '');          
         $this->form_validation->set_rules('q2', 'Q2', '');          
@@ -78,7 +97,7 @@ if (in_array($params, $data['people']))
     
         if ($this->form_validation->run() == FALSE) // validation hasn't been passed
         {
-            $this->load->view('questions_view');
+            $this->load->view('goalsprojectviews/questionsdefault');
         }
         else // passed validation proceed to post success logic
         {
@@ -97,12 +116,16 @@ if (in_array($params, $data['people']))
                             'uniqid' => uniqid(),
                             'timestamp' => date(DATE_RSS) 
                         );
-                    
+            // send email
+           $this->utils111->sendConfirmationMail(array('q1'=>'asdsad'));
+            
+
             // run insert model to write data to db
         
             if ($this->goalsproject_model->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
             {
-                redirect('goals/success');   // or whatever logic needs to occur
+                
+                redirect('goals/success',$data);   // or whatever logic needs to occur
             }
             else
             {
@@ -112,7 +135,7 @@ if (in_array($params, $data['people']))
         }
     }
     function success()
-    {   
+    {      $data = $this->data;
         $data['title'] = "You're absolutely smashing";
         $data['success'] = "Goals submitted, you're absolutely smashing";
         $this->load->view('templates/header', $data);
@@ -122,19 +145,5 @@ if (in_array($params, $data['people']))
     }
 
 
-public function answers ($params = NULL) {
-        $data = $this->data;
-        $data['title'] = 'Answers for '.$params;
-        $this->load->view('templates/header', $data);
-        $this->load->view('goalsprojectviews/sidebar',$data);
-if (in_array($params, $data['people']))
-        {$data['query'] = $this->goalsproject_model->getanswers($params); //params = person name &
-            $this->load->view('goalsprojectviews/answers', $data);}
-        else{
-            $this->load->view('goalsprojectviews/answersdefault');
-        }
-
-        $this->load->view('templates/footer');
-    }
 
 }

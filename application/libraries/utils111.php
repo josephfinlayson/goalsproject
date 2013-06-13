@@ -1,16 +1,12 @@
-<?
+ <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class utils extends CI_controller
+class utils111
 	{
 
-		 function __construct(){
 
-   parent::__construct();
-
-
-		}
 
 function sendConfirmationMail($array){
+    $CI =& get_instance();
 
 	// send email to everyone else when goals are updated
 
@@ -51,24 +47,24 @@ the goals tracker";
 
 $config = Array(
     'protocol' => 'smtp',
-    'smtp_host' => 'ssl://smtp.googlemail.com',
+    'smtp_host' => 'ssl://smtp.gmail.com',
     'smtp_port' => 465,
     'smtp_user' => 'boundlesstracker@gmail.com.',
     'smtp_pass' => 'g0alstracker',
     'mailtype'  => 'text', 
     'charset'   => 'iso-8859-1'
 );
-$this->load->library('email', $config);
-$this->email->set_newline("\r\n");
+$CI->load->library('email', $config);
+$CI->email->set_newline("\r\n");
 
-$this->email->from('cdvcwebsite@gmail.com', 'Web Site');
-$this->email->to('joseph.finlayson@gmail.com');
+$CI->email->from('boundlesstracker@gmail.com', 'Web Site');
+$CI->email->to('joseph.finlayson@gmail.com');
 
-$this->email->subject(ucwords($person)."has uploaded some new goals");
+$CI->email->subject(ucwords($person)."has uploaded some new goals");
 
-$this->email->message($email); 
+$CI->email->message($email); 
 
-$this->email->send();
+$CI->email->send();
 }
 
 function sendUpdateEmail($array){

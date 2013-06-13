@@ -34,6 +34,6 @@ public function __construct() {
 		$this->db->where('person', $person); 
 		$query = $this->db->get('goalsproject', 10, 0);
 
-	return $query->result_array();
+	return  $query->result_array();
 	}
 }
