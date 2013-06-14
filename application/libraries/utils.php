@@ -59,8 +59,8 @@ $CI->load->library('email', $config);
 $CI->email->set_newline("\r\n");
 
 $CI->email->from('boundlesstracker@gmail.com', 'Goals Tracker');
-$CI->email->to('joseph.finlayson@gmail.com', 'gayan.r.samarasinghe@gmail.com', 'phillipjamesdickinson@hotmail.com');
-
+//$CI->email->to('joseph.finlayson@gmail.com', 'gayan.r.samarasinghe@gmail.com', 'phillipjamesdickinson@hotmail.com');
+$this->email->cc('joseph.finlayson@gmail.com', 'gayan.r.samarasinghe@gmail.com', 'phillipjamesdickinson@hotmail.com');
 $CI->email->subject(ucwords($person)." has uploaded some new goals");
 
 $CI->email->message($email); 
