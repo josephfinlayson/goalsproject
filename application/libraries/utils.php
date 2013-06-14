@@ -22,7 +22,7 @@ function sendConfirmationMail($array){
 //);
 extract($array);
 
-    $email = "Hello Lads,
+    $email = "<html> <body> Hello Lads,
 
 Some new goals have been uploaded from ".ucwords($person).". Good luck to him! 
 
@@ -43,7 +43,7 @@ $sa
 Maybe it's time that you considered updating your goals?
 
 Sincerely,
-the goals tracker";
+the goals tracker </body> </html>";
 
 $config = Array(
     'protocol' => 'smtp',
@@ -51,7 +51,7 @@ $config = Array(
     'smtp_port' => 465,
     'smtp_user' => 'boundlesstracker@gmail.com',
     'smtp_pass' => 'g0alstracker',
-    'mailtype'  => 'text', 
+    'mailtype'  => 'html', 
     'charset'   => 'iso-8859-1',
     'send_multipart' => FALSE
 );
@@ -59,6 +59,7 @@ $CI->load->library('email', $config);
 $CI->email->set_newline("\r\n");
 
 $CI->email->from('boundlesstracker@gmail.com', 'Goals Tracker');
+//$CI->email->to('joseph.finlayson@gmail.com');
 $CI->email->to('joseph.finlayson@gmail.com, gayan.r.samarasinghe@gmail.com, phillipjamesdickinson@hotmail.com, phillipjdickinson@googlemail.com');
 //$this->email->cc('joseph.finlayson@gmail.com', 'gayan.r.samarasinghe@gmail.com', 'phillipjamesdickinson@hotmail.com');
 $CI->email->subject(ucwords($person)." has uploaded some new goals");
