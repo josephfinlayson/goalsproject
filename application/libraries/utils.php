@@ -24,7 +24,7 @@ extract($array);
 
     $email = "<html> <body> Hello Lads,
 <p>
-Some new goals have been uploaded from ".ucwords($person).". Good luck to him! 
+Some new goals have been uploaded from ".ucwords($person).". Good luck to him!
 </p>
 <p>
 He's said the following:
