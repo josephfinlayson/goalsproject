@@ -23,27 +23,31 @@ function sendConfirmationMail($array){
 extract($array);
 
     $email = "<html> <body> Hello Lads,
-
+<p>
 Some new goals have been uploaded from ".ucwords($person).". Good luck to him! 
-
+</p>
+<p>
 He's said the following:
-
-$q1
-$a1
-$q2
-$a2
-$q3
-
+</p>
+<p>
+$q1 </br>
+$a1 </br>
+$q2 </br>
+$a2 </br>
+$q3 </br>
+</p> <p>
 And he's reflected on the following
-
+</p>
+<p>
 $sq
 $sa
-
-
+</p>
+<p>
 Maybe it's time that you considered updating your goals?
-
-Sincerely,
-the goals tracker </body> </html>";
+</p>
+<p>
+Sincerely,</br>
+the goals tracker </p> </body> </html>";
 
 $config = Array(
     'protocol' => 'smtp',
