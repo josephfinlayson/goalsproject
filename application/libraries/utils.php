@@ -33,7 +33,8 @@ $a1 </br>
 <strong>$q2</strong>
 $a2 </br>
 <strong>$q3</strong>
-</p>$a3<p>
+$a3</p>
+<p>
 And he's reflected/summed up/looked forward with the following
 </p>
 <p>
