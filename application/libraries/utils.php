@@ -22,28 +22,26 @@ function sendConfirmationMail($array){
 //);
 extract($array);
 
-    $email = "<html> <body> Hello Lads,
-<p>
-Some new goals have been uploaded from ".ucwords($person).". Good luck to him!
-</p>
+    $email = "<html><!DOCTYPE html> <body> Hello Lads,
+<p>Some new goals have been uploaded from ".ucwords($person).". Good luck to him!</p>
 <p>
 He's said the following:
 </p>
 <p>
-$q1 </br>
+<strong>$q1 </strong>
 $a1 </br>
-$q2 </br>
+<strong>$q2</strong>
 $a2 </br>
-$q3 </br>
-</p> <p>
-And he's reflected on the following
+<strong>$q3</strong>
+</p>$a3<p>
+And he's reflected/summed up/looked forward with the following
 </p>
 <p>
-$sq
+<strong>$sq</strong>
 $sa
 </p>
 <p>
-Maybe it's time that you considered updating your goals?
+Maybe it's time that you considered updating your goals on <a href=\"http://goalsproject.herokuapp.com\">Goalsproject.herokuapp.com</a>?
 </p>
 <p>
 Sincerely,</br>
@@ -64,7 +62,7 @@ $CI->email->set_newline("\r\n");
 
 $CI->email->from('boundlesstracker@gmail.com', 'Goals Tracker');
 //$CI->email->to('joseph.finlayson@gmail.com');
-$CI->email->to('joseph.finlayson@gmail.com, gayan.r.samarasinghe@gmail.com, phillipjamesdickinson@hotmail.com, phillipjdickinson@googlemail.com');
+$CI->email->to('joseph.finlayson@gmail.com, gayan.r.samarasinghe@gmail.com, phillipjdickinson@googlemail.com');
 //$this->email->cc('joseph.finlayson@gmail.com', 'gayan.r.samarasinghe@gmail.com', 'phillipjamesdickinson@hotmail.com');
 $CI->email->subject(ucwords($person)." has uploaded some new goals");
 
