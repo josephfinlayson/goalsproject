@@ -54,8 +54,6 @@ $config = Array(
     'smtp_user' => 'boundlesstracker@gmail.com',
     'smtp_pass' => 'g0alstracker',
     'mailtype'  => 'html', 
-    'charset'   => 'iso-8859-1',
-    'send_multipart' => FALSE
 );
 $CI->load->library('email', $config);
 $CI->email->set_newline("\r\n");
