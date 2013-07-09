@@ -1,0 +1,10 @@
+.prevanswers{
+	display: inline;
+	overflow: auto;
+	white-space: pre-wrap;
+	overflow: inherit;
+/*	text-overflow:;*/
+}
+.prevanswers p {
+	display: inline;
+}

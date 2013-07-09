@@ -1,10 +1,11 @@
 
+
 <div class="span8">
-<?php if (isset($query)) 
-{echo "TRUE";} else 
-{
-       echo "FALSE";
-} ?>
+<?php //if (isset($query)) 
+// {echo "TRUE";} else 
+// {
+//        echo "FALSE";
+// } ?>
 <? //var_dump($query);?>
 <h1> Queries for <?php  echo ucwords($query[0]['person']); ?> </h1>
 
@@ -26,7 +27,9 @@ echo form_open('goals/questions_form', $attributes); ?>
       
         <?php echo form_error('a1'); ?>
         <br /><textarea rows="6" id="a1" class="span5" type="text" name="a1" placeholder="Type something…" value="<?php echo set_value('a1'); ?>"></textarea>
+
 </p>
+         <div class = "prevanswers" style="display:inline">Last week you said: <?=$query[0]['a1']?> </div>
 <p>
         <label for="q2"><h3>Query 2:</h3></label>
         <?php echo form_error('q2'); ?>
@@ -35,6 +38,7 @@ echo form_open('goals/questions_form', $attributes); ?>
      
         <?php echo form_error('a2'); ?>
         <br /><textarea rows="6" id="a2" class="span5" type="text" name="a2" placeholder="Type something…" value="<?php echo set_value('a2'); ?>"></textarea>
+        <div class = "prevanswers" style="display:inline">Last week you said: <?=$query[0]['a2']?> </div> 
 </p>
 <p>
         <label for="q3"><h3>Query 3:</h3></label>
@@ -43,6 +47,7 @@ echo form_open('goals/questions_form', $attributes); ?>
 
         <?php echo form_error('a3'); ?>
         <br /><textarea rows="6" id="a3" class="span5" type="text" name="a3" placeholder="Type something…" value="<?php echo set_value('a3'); ?>"></textarea>
+        <div class = "prevanswers">Last week you said: <?=$query[0]['a3']?> </div>
 </p>
 
 <p>
@@ -52,6 +57,7 @@ echo form_open('goals/questions_form', $attributes); ?>
 
         <?php echo form_error('sa'); ?>
         <br /><textarea rows="6" id="sa" class="span5" type="text" name="sa" placeholder="Type something…" value="<?php echo set_value('sa'); ?>"></textarea>
+         <div class = "prevanswers" style="display:inline">Last week you said: <?=$query[0]['sa']?> </div>
 </p>
 
 
@@ -60,5 +66,7 @@ echo form_open('goals/questions_form', $attributes); ?>
 </p>
 
 <?php echo form_close(); ?>
+</div>
 
 </div>
+

@@ -11,7 +11,7 @@
     <!-- Le styles -->
 
  <link rel="stylesheet" href='<?php echo base_url(); ?>css/bootstrap.css' type="text/css"/>
- <link rel="stylesheet" href='<?php echo base_url(); ?>css/bitzon.css' type="text/css"/>
+
 
     <style type="text/css">
       body {
@@ -20,7 +20,7 @@
       }
     </style>
  <link href="<?=base_url()?>css/bootstrap-responsive.css" rel="stylesheet"> 
-
+ <link rel="stylesheet" href='<?php echo base_url(); ?>css/my.css' type="text/css"/>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
