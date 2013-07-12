@@ -1,10 +1,31 @@
-.prevanswers{
+.myouter{
+		width: 700px; 
+		overflow:hidden; 
+		border:2px solid lightblue; 
+		padding:10px;
+
+}
+.questions{
+width:400px; border:2px solid salmon; float:left;
 	display: inline;
-	overflow: auto;
-	white-space: pre-wrap;
-	overflow: inherit;
+	float: left;
+}
+
+
+.prevanswers {
+	padding-left: 10px;
+	display: inline;
+	float: left;
+width:200px;
+overflow: auto;
+ border:2px solid salmon; 
+	/*margin-right: 10px;
+	padding: 5px 5px 5px 5px;
+
 /*	text-overflow:;*/
 }
-.prevanswers p {
-	display: inline;
+
+* {
+
+	border: 	1px dotted blue;
 }
