@@ -42,7 +42,7 @@ echo form_open('goals/questions_form', $attributes); ?>
         <div class = "questions">
         <textarea rows="6" id="a2" class="span12" type="text" name="a2" placeholder="Type something…" value="<?php echo set_value('a2'); ?>"></textarea>
      </div>
-        <div class = "prevanswers span5">Last week you said: <?=$query[0]['a2']?> </div> 
+        <div class = "prevanswers span5"><p>Last week you said:</p><?=$query[0]['a2']?> </div> 
 
 </div>
 <div>
@@ -57,7 +57,7 @@ echo form_open('goals/questions_form', $attributes); ?>
             <textarea rows="6" id="a3" class="span12" type="text" name="a3" placeholder="Type something…" value="<?php echo set_value('a3'); ?>"></textarea>
         </div>
         <div class = "prevanswers span5">
-            Last week you said: <?=$query[0]['a3']?> 
+            <p>Last week you said:</p> <?=$query[0]['a3']?> 
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@ echo form_open('goals/questions_form', $attributes); ?>
             <textarea rows="6" id="sa" class="span12" type="text" name="sa" placeholder="Type something…" value="<?php echo set_value('sa'); ?>"></textarea>
         </div>
          <div class = "prevanswers span5">
-            Last week you said: <?=$query[0]['sa']?> 
+            <p>Last week you said:</p><?=$query[0]['sa']?> 
          </div>
     </div>
 </div>
