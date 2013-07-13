@@ -1,12 +1,14 @@
 .myouter{
-		width: 700px; 
+		width: auto; 
 		overflow:hidden; 
-		border:2px solid lightblue; 
+
 		padding:10px;
 
 }
 .questions{
-width:400px; border:2px solid salmon; float:left;
+width:400px; 
+ 
+float:left;
 	display: inline;
 	float: left;
 }
@@ -18,14 +20,14 @@ width:400px; border:2px solid salmon; float:left;
 	float: left;
 width:200px;
 overflow: auto;
- border:2px solid salmon; 
+ 
 	/*margin-right: 10px;
 	padding: 5px 5px 5px 5px;
 
 /*	text-overflow:;*/
 }
 
-* {
+/** {
 
 	border: 	1px dotted blue;
-}
+*/
